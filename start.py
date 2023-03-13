@@ -2,7 +2,7 @@ import time
 from gatherer import Gatherer
 import csv
 
-def register_into_csv(gatherer: Gatherer, datawriter: csv._writer):
+def register_into_csv(gatherer: Gatherer, datawriter):
     data = gatherer.collect()
     datawriter.writerow([
         time.time(),

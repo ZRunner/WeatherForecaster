@@ -8,7 +8,7 @@ class BarometerSensor:
 
     def read_temperature(self) -> float:
         "Returns the capted temperature in °C"
-        return self.sensor.read_temperature
+        return self.sensor.read_temperature()
 
     def read_pressure(self) -> float:
         "Returns the capted pressure in Pascals"

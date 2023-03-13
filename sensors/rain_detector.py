@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-import PCF8591 as ADC
-import RPi.GPIO as GPIO
 import time
+
+from . import PCF8591 as ADC
+import RPi.GPIO as GPIO
 
 
 class RainDetector:

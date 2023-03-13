@@ -1,7 +1,20 @@
+import csv
+import os
 import time
 from datetime import datetime
+
 from gatherer import Gatherer
-import csv
+
+FILE_NAME = "data.csv"
+
+
+def write_file_headers(datawriter):
+    datawriter.writerow([
+        "datetime",
+        "pressure",
+        "temperature",
+        "is_raining",
+    ])
 
 def register_into_csv(gatherer: Gatherer, datawriter):
     data = gatherer.collect()
@@ -12,16 +25,24 @@ def register_into_csv(gatherer: Gatherer, datawriter):
         data['is_raining'],
     ])
 
+def get_writer(file):
+    return csv.writer(
+        file,
+        delimiter=',',
+        quotechar='|',
+        quoting=csv.QUOTE_MINIMAL
+    )
 
 def main():
+    # write headers if new file
+    if not os.path.isfile(FILE_NAME):
+        with open(FILE_NAME, 'w', encoding="utf8") as csvfile:
+            writer = get_writer(csvfile)
+            write_file_headers(writer)
+    # start collecting data
     gatherer = Gatherer()
-    with open("data.csv", 'a', encoding="utf8") as csvfile:
-        datawriter = csv.writer(
-            csvfile,
-            delimiter=',',
-            quotechar='|',
-            quoting=csv.QUOTE_MINIMAL
-        )
+    with open(FILE_NAME, 'a', encoding="utf8") as csvfile:
+        datawriter = get_writer(csvfile)
         while True:
             print("collecting")
             register_into_csv(gatherer, datawriter)

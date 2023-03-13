@@ -5,7 +5,7 @@ import csv
 def register_into_csv(gatherer: Gatherer, datawriter):
     data = gatherer.collect()
     datawriter.writerow([
-        time.time(),
+        round(time.time()),
         data['pressure'],
         data['temperature'],
         data['is_raining'],
@@ -22,8 +22,9 @@ def main():
             quoting=csv.QUOTE_MINIMAL
         )
         while True:
+            print("collecting")
             register_into_csv(gatherer, datawriter)
-            time.sleep(10)
+            time.sleep(30)
 
 if __name__ == "__main__":
     try:

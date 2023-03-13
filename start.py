@@ -14,7 +14,7 @@ def register_into_csv(gatherer: Gatherer, datawriter):
 
 def main():
     gatherer = Gatherer()
-    with open("data.csv", 'wa', encoding="utf8") as csvfile:
+    with open("data.csv", 'a', encoding="utf8") as csvfile:
         datawriter = csv.writer(
             csvfile,
             delimiter=',',

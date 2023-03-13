@@ -5,7 +5,7 @@ from datetime import datetime
 
 from gatherer import Gatherer
 
-FILE_NAME = "data.csv"
+FILE_NAME = os.path.dirname(__file__) + "/data.csv"
 
 
 def write_file_headers(datawriter):

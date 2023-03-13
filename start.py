@@ -1,11 +1,12 @@
 import time
+from datetime import datetime
 from gatherer import Gatherer
 import csv
 
 def register_into_csv(gatherer: Gatherer, datawriter):
     data = gatherer.collect()
     datawriter.writerow([
-        round(time.time()),
+        datetime.now().isoformat(),
         data['pressure'],
         data['temperature'],
         data['is_raining'],

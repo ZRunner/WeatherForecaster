@@ -41,12 +41,12 @@ def main():
             write_file_headers(writer)
     # start collecting data
     gatherer = Gatherer()
-    with open(FILE_NAME, 'a', encoding="utf8") as csvfile:
-        datawriter = get_writer(csvfile)
-        while True:
-            print("collecting")
+    while True:
+        print("collecting")
+        with open(FILE_NAME, 'a', encoding="utf8") as csvfile:
+            datawriter = get_writer(csvfile)
             register_into_csv(gatherer, datawriter)
-            time.sleep(30)
+        time.sleep(30)
 
 if __name__ == "__main__":
     try:

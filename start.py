@@ -13,6 +13,7 @@ def write_file_headers(datawriter):
         "datetime",
         "pressure",
         "temperature",
+        "humidity",
         "is_raining",
     ])
 
@@ -22,6 +23,7 @@ def register_into_csv(gatherer: Gatherer, datawriter):
         datetime.now().isoformat(),
         data['pressure'],
         data['temperature'],
+        data['humidity'],
         data['is_raining'],
     ])
 

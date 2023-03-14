@@ -13,7 +13,7 @@ class DataDict(TypedDict):
 class Gatherer:
     def __init__(self):
         self.barometer = BarometerSensor()
-        self.humiture = HumitureSensor()
+        self.humiture = HumitureSensor(27)
         self.rain_detector = RainDetector()
     
     def collect(self) -> DataDict:

@@ -19,6 +19,7 @@ def write_file_headers(datawriter):
 
 def register_into_csv(gatherer: Gatherer, datawriter):
     data = gatherer.collect()
+    print(data)
     datawriter.writerow([
         datetime.now().isoformat(),
         data['pressure'],

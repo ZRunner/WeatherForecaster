@@ -38,6 +38,7 @@ def get_writer(file):
 def main():
     # write headers if new file
     if not os.path.isfile(FILE_NAME):
+        print("Creating data file")
         with open(FILE_NAME, 'w', encoding="utf8") as csvfile:
             writer = get_writer(csvfile)
             write_file_headers(writer)

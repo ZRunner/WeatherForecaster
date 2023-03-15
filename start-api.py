@@ -6,7 +6,7 @@ import requests
 from api_key import WEATHER_API_TOKEN
 from weather_api_typing import ApiAnswer, ApiWeatherCondition
 
-CITY = "Montreal"
+CITY = "45.485,-73.620"
 FILE_NAME = os.path.dirname(__file__) + "/conditions.csv"
 
 

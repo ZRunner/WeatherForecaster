@@ -1,10 +1,19 @@
 #!/usr/bin/bash
 
-GRAFANA_FILE=/usr/share/grafana/public/weather-forecast/data.csv
+GRAFANA_DATA_FILE=/usr/share/grafana/public/weather-forecast/data.csv
+GRAFANA_CONDITIONS_FILE=/usr/share/grafana/public/weather-forecast/conditions.csv
 
-if [ -f "$GRAFANA_FILE" ]
+
+# data file
+if [ -f "$GRAFANA_DATA_FILE" ]
 then
-    rm "$GRAFANA_FILE"
+    rm "$GRAFANA_DATA_FILE"
 fi
+ln "$(pwd)/data.csv" "$GRAFANA_DATA_FILE"
 
-ln "$(pwd)/data.csv" "$GRAFANA_FILE"
+# conditions file
+if [ -f "$GRAFANA_CONDITIONS_FILE" ]
+then
+    rm "$GRAFANA_CONDITIONS_FILE"
+fi
+ln "$(pwd)/conditions.csv" "$GRAFANA_CONDITIONS_FILE"

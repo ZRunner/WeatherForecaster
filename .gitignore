@@ -1,5 +1,9 @@
-# output file
+# output files
 data.csv
+conditions.csv
+
+# tokens thing
+api_key.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

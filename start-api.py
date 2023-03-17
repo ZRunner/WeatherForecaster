@@ -34,7 +34,7 @@ def register_into_csv(datawriter, last_updated: datetime.datetime, weather: ApiC
         weather['condition']['text'],
         weather['condition']['code'],
         weather["precip_mm"],
-        weather["is_day"],
+        weather["is_day"] == 1,
         
     ])
 

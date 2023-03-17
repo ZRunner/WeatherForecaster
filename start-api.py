@@ -4,7 +4,7 @@ import csv
 import requests
 
 from api_key import WEATHER_API_TOKEN
-from weather_api_typing import ApiAnswer, ApiWeatherCondition
+from weather_api_typing import ApiAnswer, ApiCurrentWeather, ApiWeatherCondition
 
 CITY = "45.485,-73.620"
 FILE_NAME = os.path.dirname(__file__) + "/conditions.csv"
@@ -23,14 +23,19 @@ def write_file_headers(datawriter):
     datawriter.writerow([
         "datetime",
         "condition-text",
-        "condition-code"
+        "condition-code",
+        "precipitations",
+        "is_day",
     ])
 
-def register_into_csv(datawriter, last_updated: datetime.datetime, condition: ApiWeatherCondition):
+def register_into_csv(datawriter, last_updated: datetime.datetime, weather: ApiCurrentWeather):
     datawriter.writerow([
         last_updated.isoformat(),
-        condition['text'],
-        condition['code'],
+        weather['condition']['text'],
+        weather['condition']['code'],
+        weather["precip_mm"],
+        weather["is_day"],
+        
     ])
 
 def get_writer(file):
@@ -58,7 +63,7 @@ def main():
         register_into_csv(
             datawriter,
             last_updated=last_updated,
-            condition=data["condition"]
+            weather=data
         )
 
 if __name__ == "__main__":

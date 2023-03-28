@@ -1,3 +1,5 @@
 smbus2
 RPi.GPIO
 requests
+pmdarima
+pandas

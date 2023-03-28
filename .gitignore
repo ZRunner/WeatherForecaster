@@ -1,6 +1,7 @@
 # output files
 data.csv
 conditions.csv
+arima_model.pkl
 
 # tokens thing
 api_key.py

@@ -84,19 +84,30 @@ def train_arima(data: pd.DataFrame, debug_trace: bool=False):
     model.fit(data["precipitations"], X=data[["pressure", "humidity", "temperature", "hour"]])
     return model
 
+def update_model(model: pm.ARIMA, hours: int):
+    n_periods = 4 * hours
+    data = get_dataset()
+    data = apply_time_offset(data, hours=2)[-n_periods:]
+    model.update(
+        data["precipitations"],
+        X=data[["pressure", "humidity", "temperature", "hour"]],
+        maxiter=2
+    )
+
 def save_model(model: pm.ARIMA):
     with open(MODEL_FILE_NAME, 'wb') as raw:
         pickle.dump(model, raw)
 
-def load_model():
+def load_model() -> pm.ARIMA:
     with open(MODEL_FILE_NAME, 'rb') as raw:
         model = pickle.load(raw)
     return model
 
 def predict(model: pm.ARIMA, data: pd.DataFrame, n_periods: int):
-    forecast, _ = model.predict(
+    forecast = model.predict(
         X=data[["pressure", "humidity", "temperature", "hour"]],
-        n_periods=n_periods,
-        return_conf_int=True
+        n_periods=n_periods
     )
-    return pd.DataFrame(forecast, columns=['Prediction']).round()
+    new_data = pd.DataFrame(forecast, index=data.index, columns=['Prediction']).round()
+    new_data.index += pd.DateOffset(hours=n_periods/4)
+    return new_data

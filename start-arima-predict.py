@@ -1,6 +1,6 @@
 from requests import post
 
-from arima_methods import (get_sensors_dataset, load_model, predict,
+from arima_methods import (get_sensors_dataset, load_model, predict, save_model,
                            update_model)
 
 URL = "https://wf.zrunner.me/data"
@@ -10,6 +10,7 @@ def forecast(hours: int):
     model = load_model()
     data = get_sensors_dataset().resample('15min').mean()[-n_periods:]
     update_model(model, hours)
+    save_model(model)
     data["hour"] = data.index.hour
     predictions = predict(model, data, n_periods=n_periods)
     json_obj = {}
